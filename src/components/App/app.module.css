@@ -1,0 +1,11 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.constructor-body {
+    display: flex;
+    flex-direction: row;
+    column-gap: 40px;
+}
