@@ -3,6 +3,7 @@ import BurgerConstructorMovableTopping from "../BurgerConstructorMoveableTopping
 import styles from "../constructor.module.css"
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import {topping} from "../../../utils/types";
 const BurgerConstructorToppingList = (props) => {
     return (
         <div className={classNames(styles["constructor__topping-list"], "mt-4 mb-4")}>
@@ -14,12 +15,7 @@ const BurgerConstructorToppingList = (props) => {
 }
 
 BurgerConstructorToppingList.propTypes = {
-    toppings: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string,
-        image: PropTypes.string,
-        price: PropTypes.number,
-        id: PropTypes.number
-    })),
+    toppings: PropTypes.arrayOf(topping),
 };
 
 export default BurgerConstructorToppingList

@@ -7,21 +7,15 @@ import Modal from "../Modal/Modal";
 import IngredientDetails from "../ModalIngredient/IngredientDetails";
 
 async function fetchIngredientsData(url) {
-
     const response = await fetch(url);
-
-    if (!response.ok) {
-        return { ok: false, result: null}
-    }
-
     const result = await response.json();
-    return {ok: true, result: result.data}
+    return result;
 }
 
 function splitByType(ingredients){
-    let main = []
-    let sauce = []
-    let bun = []
+    const main = []
+    const sauce = []
+    const bun = []
     ingredients.map((ingredient) => {
         if (ingredient.type === "bun") {
             bun.push(ingredient)
@@ -37,20 +31,25 @@ function splitByType(ingredients){
 }
 function App() {
 
-    const ingredientsUrl = "https://norma.nomoreparties.space/api/ingredients "
+    const ingredientsUrl = "https://norma.nomoreparties.space/api/ingredients"
     const [ingredients, setIngredients] = useState([]);
     useEffect(() => {
         const getIngredients = async () => {
-            const {ok, result} = await fetchIngredientsData(ingredientsUrl);
-            if (ok) {
-                setIngredients(result)
+            try {
+                const {success, data} = await fetchIngredientsData(ingredientsUrl);
+                if (success) {
+                    setIngredients(data)
+                }
+            }
+            catch {
+                setIngredients([])
             }
         };
 
         getIngredients();
     }, []);
-    const [bun, sauce, main] = splitByType(ingredients)
-    if (ingredients.length !== 0) {
+    if (ingredients !== undefined && ingredients.length !== 0) {
+        const [bun, sauce, main] = splitByType(ingredients)
         const top = bun[0]
         const bottom = bun[0]
         const toppings = [
@@ -68,10 +67,10 @@ function App() {
         return (
             <div className={styles.app}>
                 <AppHeader/>
-                <div className={styles["constructor-body"]}>
+                <main className={styles["constructor-body"]}>
                     <BurgerIngredients bun={bun} sauce={sauce} main={main}/>
                     <BurgerConstructor top={top} bottom={bottom} toppings={toppings}/>
-                </div>
+                </main>
             </div>
         );
     }

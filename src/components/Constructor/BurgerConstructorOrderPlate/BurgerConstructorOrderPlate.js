@@ -12,7 +12,7 @@ const BurgerConstructorOrderPlate = (props) => {
                     <CurrencyIcon type="primary" />
                 </PricePlate>
             </div>
-            <div style={{minWidth: "215px"}}>
+            <div className={styles["constructor__order-plate-container"]}>
                 <Button htmlType="button" type="primary" size="large" onClick={() => {props.createOrder()}}>
                     Оформить заказ
                 </Button>

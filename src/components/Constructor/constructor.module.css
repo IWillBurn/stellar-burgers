@@ -28,3 +28,7 @@
     overflow-y: scroll;
     row-gap: 16px;
 }
+
+.constructor__order-plate-container {
+    min-width: 215px;
+}

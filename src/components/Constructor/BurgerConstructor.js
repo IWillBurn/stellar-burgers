@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./constructor.module.css"
 import {ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstructorToppingList from "./BurgerConstructorToppingList/BurgerConstructorToppingList";
@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../ModalIngredient/IngredientDetails";
 import OrderDetails from "../OrderDetails/OrderDetails";
+import {topping} from "../../utils/types";
 const BurgerConstructor = (props) => {
     let sum = props.top.price + props.bottom.price
     props.toppings.map((topping) => sum+=topping.price)
@@ -22,7 +23,7 @@ const BurgerConstructor = (props) => {
                     <ConstructorElement
                         type="top"
                         isLocked={true}
-                        text={props.top.name}
+                        text={props.top.name + " (верх)"}
                         price={props.top.price}
                         thumbnail={props.top.image}
                     />
@@ -32,35 +33,26 @@ const BurgerConstructor = (props) => {
                     <ConstructorElement
                         type="bottom"
                         isLocked={true}
-                        text={props.bottom.name}
+                        text={props.bottom.name + " (низ)"}
                         price={props.bottom.price}
                         thumbnail={props.bottom.image}
                     />
                     <BurgerConstructorOrderPlate sum ={sum} createOrder={() => {setPopup(true)}}/>
                 </div>
             </div>
-            <Modal open={popup} close={() => {setPopup(false)}}><OrderDetails /></Modal>
+            {
+                popup && (
+                    <Modal  close={() => {setPopup(false)}}><OrderDetails /></Modal>
+                )
+            }
         </>
     );
 }
 
 BurgerConstructor.propTypes = {
-    top:PropTypes.shape({
-        name: PropTypes.string,
-        image: PropTypes.string,
-        price: PropTypes.number,
-    }),
-    bottom:PropTypes.shape({
-        name: PropTypes.string,
-        image: PropTypes.string,
-        price: PropTypes.number,
-        id: PropTypes.number,
-    }),
-    toppings: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string,
-        image: PropTypes.string,
-        price: PropTypes.number,
-    })),
+    top: topping,
+    bottom: topping,
+    toppings: PropTypes.arrayOf(topping),
 };
 
 export default BurgerConstructor

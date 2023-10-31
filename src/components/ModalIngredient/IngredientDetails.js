@@ -6,10 +6,10 @@ import PropTypes from "prop-types";
 const IngredientDetails = (props) => {
     return (
         <div className={styles["ingredient-details"]}>
-            <p className={"text text_type_main-large mt-10 mr-10 ml-10"} style={{alignSelf: "start"}}>
+            <p className={classNames("text text_type_main-large mt-10 mr-10 ml-10", styles["ingredient-details__title"])}>
                 Детали ингредиента
             </p>
-            <img style={{height: "240px", width: "520px"}} src={props.ingredient.image_large} alt={props.ingredient.name}/>
+            <img className={styles["ingredient-details__image"]} src={props.ingredient.image_large} alt={props.ingredient.name}/>
             <p className={"text text_type_main-medium mt-4"}>
                 {props.ingredient.name}
             </p>

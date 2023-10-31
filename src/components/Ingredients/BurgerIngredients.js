@@ -4,16 +4,17 @@ import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./ingredients.module.css"
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import {ingredient} from "../../utils/types";
 
 const BurgerIngredients = (props) => {
 
     const [current, setCurrent]= React.useState('Булки')
     return (
       <div className={styles.ingredients}>
-          <h1 style={{ display: 'flex', alignSelf: "start" }} className={"text text_type_main-large mt-10"}>
+          <h1 className={classNames("text text_type_main-large mt-10", styles.ingredients__title)}>
               Соберите бургер
           </h1>
-          <div style={{ display: 'flex' }} className={"mt-5"}>
+          <div className={classNames("mt-5", styles.ingredients__container)}>
               <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>
                   Булки
               </Tab>
@@ -34,42 +35,9 @@ const BurgerIngredients = (props) => {
 }
 
 BurgerIngredients.propTypes = {
-    bun: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string,
-        image: PropTypes.string,
-        price: PropTypes.number,
-        _id: PropTypes.string,
-
-        image_large: PropTypes.string,
-        calories: PropTypes.number,
-        proteins: PropTypes.number,
-        fat: PropTypes.number,
-        carbohydrates: PropTypes.number,
-    })),
-    sauce: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string,
-        image: PropTypes.string,
-        price: PropTypes.number,
-        _id: PropTypes.string,
-
-        image_large: PropTypes.string,
-        calories: PropTypes.number,
-        proteins: PropTypes.number,
-        fat: PropTypes.number,
-        carbohydrates: PropTypes.number,
-    })),
-    main: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string,
-        image: PropTypes.string,
-        price: PropTypes.number,
-        _id: PropTypes.string,
-
-        image_large: PropTypes.string,
-        calories: PropTypes.number,
-        proteins: PropTypes.number,
-        fat: PropTypes.number,
-        carbohydrates: PropTypes.number,
-    })),
+    bun: PropTypes.arrayOf(ingredient),
+    sauce: PropTypes.arrayOf(ingredient),
+    main: PropTypes.arrayOf(ingredient),
 };
 
 

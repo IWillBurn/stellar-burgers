@@ -6,6 +6,15 @@
     justify-content: center;
 }
 
+.ingredient-details__title {
+    align-self: start
+}
+
+.ingredient-details__image {
+    height: 240px;
+    width: 520px;
+}
+
 .ingredient-parameter {
     display: flex;
     flex: 1;

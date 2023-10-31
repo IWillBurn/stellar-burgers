@@ -2,6 +2,7 @@ import React from 'react';
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../constructor.module.css";
 import PropTypes from "prop-types";
+import {topping} from "../../../utils/types";
 const BurgerConstructorMovableTopping = (props) => {
     return (
         <div className={styles["constructor__movable-topping"]}>
@@ -16,11 +17,7 @@ const BurgerConstructorMovableTopping = (props) => {
 }
 
 BurgerConstructorMovableTopping.propTypes = {
-    topping:PropTypes.shape({
-        name: PropTypes.string,
-        image: PropTypes.string,
-        price: PropTypes.number,
-    })
+    topping: topping,
 };
 
 export default BurgerConstructorMovableTopping

@@ -12,7 +12,7 @@ const OrderDetails = () => {
                 идентификатор заказа
             </p>
             <div className={"mt-15 mb-15"}>
-                <img style={{height: "120px", width: "120px"}} src={success} alt={"Успех"}/>
+                <img className={styles["modal-order__image"]} src={success} alt={"Успех"}/>
             </div>
             <p className={"text text_type_main-default"}>
                 Ваш заказ начали готовить
