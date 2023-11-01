@@ -1,0 +1,34 @@
+.ingredient-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ingredient-details__title {
+    align-self: start
+}
+
+.ingredient-details__image {
+    height: 240px;
+    width: 520px;
+}
+
+.ingredient-parameter {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 112px;
+    height: 56px;
+}
+
+.ingredient-parameter__list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 20px;
+}
