@@ -5,6 +5,7 @@ export const ingredient = PropTypes.shape({
     image: PropTypes.string,
     price: PropTypes.number,
     _id: PropTypes.string,
+    position: PropTypes.number,
 
     image_large: PropTypes.string,
     calories: PropTypes.number,

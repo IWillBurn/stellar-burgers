@@ -27,6 +27,7 @@
     flex-direction: column;
     overflow-y: scroll;
     row-gap: 16px;
+    width: 100%;
 }
 
 .constructor__order-plate-container {
