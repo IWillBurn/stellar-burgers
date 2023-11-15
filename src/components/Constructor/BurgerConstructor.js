@@ -10,19 +10,24 @@ import Modal from "../Modal/Modal";
 import IngredientDetails from "../ModalIngredient/IngredientDetails";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchOrder} from "../../services/reducers/order_reducer";
+import {fetchOrder} from "../../services/reducers/OrderReducer";
 import {useDrag, useDrop} from "react-dnd";
-import {addToList, setBun} from "../../services/slices/burger_ingredients";
-import {addCountOfId, changeBun} from "../../services/slices/ingredients";
+import {addToList, setBun} from "../../services/slices/BurgerIngredients";
+import {addCountOfId, changeBun} from "../../services/slices/Ingredients";
+import {BASE_URL} from "../../utils/consts";
 
 function getBurgerIngredientsList(toppings, bun) {
-    let ingredients_list = []
-    ingredients_list.push(bun["_id"])
+    let ingredientsList = []
+    if (bun !== undefined) {
+        ingredientsList.push(bun["_id"])
+    }
     toppings.forEach((topping) => {
-        ingredients_list.push(topping["_id"])
+        ingredientsList.push(topping["_id"])
     })
-    ingredients_list.push(bun["_id"])
-    return ingredients_list
+    if (bun !== undefined) {
+        ingredientsList.push(bun["_id"])
+    }
+    return ingredientsList
 }
 
 function sumPrices(toppings, bun) {
@@ -38,21 +43,20 @@ function sumPrices(toppings, bun) {
 
 const BurgerConstructor = () => {
 
-    const url = "https://norma.nomoreparties.space/api/orders"
+    const url = BASE_URL + "/orders"
 
     const dispatch = useDispatch()
     const toppings = useSelector((state) => state.burgerIngredients.ingredients)
     const bun = useSelector((state) => state.burgerIngredients.bun)
-    const ingredients_list = getBurgerIngredientsList(toppings, bun)
+    const ingredientsList = getBurgerIngredientsList(toppings, bun)
 
     const data = {
         url: url,
-        ingredients: ingredients_list,
+        ingredients: ingredientsList,
     }
     const top = bun;
     const bottom = bun;
     const sum = sumPrices(toppings, bun)
-    console.log(sum)
 
     const [, drop] = useDrop({
         accept: "ingredient",
@@ -63,37 +67,49 @@ const BurgerConstructor = () => {
                 dispatch(addCountOfId({id: draggedItem.ingredient["position"], count: 1}))
             }
             else{
-                dispatch(changeBun({old: bun["position"], current: draggedItem.ingredient["position"]}))
+                dispatch(changeBun({ old: bun !== undefined ? bun["position"] : -1, current: draggedItem.ingredient["position"]}))
                 dispatch(setBun(draggedItem.ingredient))
             }
         },
     });
+
+    const noOneIngredient = top === undefined && bottom === undefined && toppings.length === 0
 
     const [popup, setPopup] = useState(false)
 
     return (
         <>
             <div className={classNames("mt-25 pl-4", styles.constructor)} ref = {drop}>
-                <div className={"mr-4"}>
-                    <ConstructorElement
-                        type="top"
-                        isLocked={true}
-                        text={top.name + " (верх)"}
-                        price={top.price}
-                        thumbnail={top.image}
-                    />
-                </div>
+                {   top !== undefined && (
+                    <div className={"mr-4"}>
+                        <ConstructorElement
+                            type="top"
+                            isLocked={true}
+                            text={top.name + " (верх)"}
+                            price={top.price}
+                            thumbnail={top.image}
+                        />
+                    </div>)
+                }
                 <BurgerConstructorToppingList toppings ={toppings}/>
-                <div className={"mr-4"}>
-                    <ConstructorElement
-                        type="bottom"
-                        isLocked={true}
-                        text={bottom.name + " (низ)"}
-                        price={bottom.price}
-                        thumbnail={bottom.image}
-                    />
-                    <BurgerConstructorOrderPlate sum ={sum} createOrder={() => {setPopup(true); dispatch(fetchOrder(data))}}/>
-                </div>
+                {   bottom !== undefined && (
+                    <div className={"mr-4"}>
+                        <ConstructorElement
+                            type="bottom"
+                            isLocked={true}
+                            text={bottom.name + " (низ)"}
+                            price={bottom.price}
+                            thumbnail={bottom.image}
+                        />
+                        <BurgerConstructorOrderPlate sum ={sum} createOrder={() => {setPopup(true); dispatch(fetchOrder(data))}}/>
+                    </div>)
+                }
+                { noOneIngredient && (
+                    <p className={classNames("text text_type_main-medium", styles["constructor__placeholder-text"])}>
+                        Пожалуйста, перенесите сюда булку и ингредиенты для создания заказа
+                    </p>
+                    )
+                }
             </div>
             {
                 popup && (

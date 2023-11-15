@@ -6,9 +6,9 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import {ingredient} from "../../utils/types";
 import {useDispatch, useSelector} from "react-redux";
-import ingredients, {addCountOfId} from "../../services/slices/ingredients";
-import {fetchIngredients} from "../../services/reducers/ingredients_reducer";
-import {setBun} from "../../services/slices/burger_ingredients";
+import ingredients, {addCountOfId} from "../../services/slices/Ingredients";
+import {fetchIngredients} from "../../services/reducers/IngredientsReducer";
+import {setBun} from "../../services/slices/BurgerIngredients";
 
 export function splitByType(ingredients){
     const main = []
@@ -60,11 +60,6 @@ const BurgerIngredients = (props) => {
         return () => {
             scrollContainer.removeEventListener('scroll', handleScroll);
         };
-    }, []);
-
-    useEffect(() => {
-        dispatch(addCountOfId({id: bun[0].position, count: 2}));
-        dispatch(setBun(bun[0]))
     }, []);
     return (
       <div className={styles.ingredients}>

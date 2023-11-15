@@ -33,3 +33,7 @@
 .constructor__order-plate-container {
     min-width: 215px;
 }
+
+.constructor__placeholder-text {
+    text-align: center;
+}

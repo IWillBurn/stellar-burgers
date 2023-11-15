@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {fetchIngredients} from "../reducers/ingredients_reducer";
-import {setBun} from "./burger_ingredients";
+import {fetchIngredients} from "../reducers/IngredientsReducer";
+import {setBun} from "./BurgerIngredients";
 import {useDispatch} from "react-redux";
 
 const initialState = {
@@ -22,7 +22,9 @@ export const ingredientsSlice = createSlice({
         changeBun: (state, action) => {
             const {old, current} = action.payload
             const new_count = state.count.slice()
-            new_count[old] -= 2
+            if (old !== -1) {
+                new_count[old] -= 2
+            }
             new_count[current] += 2
             state.count = new_count
         },

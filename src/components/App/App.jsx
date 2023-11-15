@@ -4,9 +4,10 @@ import AppHeader from "../Header/AppHeader";
 import BurgerIngredients from "../Ingredients/BurgerIngredients";
 import BurgerConstructor from "../Constructor/BurgerConstructor";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchIngredients} from "../../services/reducers/ingredients_reducer";
-import {addCountOfId, getIngredients} from "../../services/slices/ingredients";
-import {setBun, setList} from "../../services/slices/burger_ingredients";
+import {fetchIngredients} from "../../services/reducers/IngredientsReducer";
+import {addCountOfId, getIngredients} from "../../services/slices/Ingredients";
+import {setBun, setList} from "../../services/slices/BurgerIngredients";
+import {BASE_URL} from "../../utils/consts";
 
 async function fetchIngredientsData(url) {
     const response = await fetch(url);
@@ -14,7 +15,7 @@ async function fetchIngredientsData(url) {
     return result;
 }
 function App() {
-    const ingredientsUrl = "https://norma.nomoreparties.space/api/ingredients"
+    const ingredientsUrl = BASE_URL + "/ingredients"
     const dispatch = useDispatch();
     const status = useSelector((state) => state.ingredients.status);
 

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {fetchOrder} from "../reducers/order_reducer";
+import {fetchOrder} from "../reducers/OrderReducer";
 
 const initialState = {
     order: {

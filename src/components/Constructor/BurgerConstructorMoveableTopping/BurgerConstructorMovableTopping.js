@@ -5,8 +5,8 @@ import PropTypes, {checkPropTypes} from "prop-types";
 import {topping} from "../../../utils/types";
 import {useDrag, useDrop} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteIngredient} from "../../../services/slices/burger_ingredients";
-import {addCountOfId} from "../../../services/slices/ingredients";
+import {deleteIngredient} from "../../../services/slices/BurgerIngredients";
+import {addCountOfId} from "../../../services/slices/Ingredients";
 const BurgerConstructorMovableTopping = (props) => {
 
     const index = props.index

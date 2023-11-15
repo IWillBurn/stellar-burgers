@@ -1,8 +1,8 @@
 import {configureStore} from '@reduxjs/toolkit'
-import ingredientsReducers from "./slices/ingredients";
-import ingredientModalReducers from "./slices/ingredient_modal";
-import orderModalReducers from "./slices/order_modal";
-import burgerIngredientsReducers from "./slices/burger_ingredients";
+import ingredientsReducers from "./slices/Ingredients";
+import ingredientModalReducers from "./slices/IngredientModal";
+import orderModalReducers from "./slices/OrderModal";
+import burgerIngredientsReducers from "./slices/BurgerIngredients";
 export const store = configureStore({  // createStore is deprecated
     reducer: {
         ingredients: ingredientsReducers,

@@ -6,10 +6,10 @@ import Modal from "../../Modal/Modal";
 import IngredientDetails from "../../ModalIngredient/IngredientDetails";
 import classNames from "classnames";
 import {ingredient} from "../../../utils/types";
-import {setIngredient} from "../../../services/slices/ingredient_modal";
+import {setIngredient} from "../../../services/slices/IngredientModal";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrag, useDrop} from "react-dnd";
-import {addToList} from "../../../services/slices/burger_ingredients";
+import {addToList} from "../../../services/slices/BurgerIngredients";
 
 const BurgerIngredientCard = (props) => {
 

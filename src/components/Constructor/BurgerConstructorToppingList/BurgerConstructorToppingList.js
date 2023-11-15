@@ -5,8 +5,8 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import {topping} from "../../../utils/types";
 import {useDispatch, useSelector} from "react-redux";
-import {setIngredient} from "../../../services/slices/ingredient_modal";
-import {setList} from "../../../services/slices/burger_ingredients";
+import {setIngredient} from "../../../services/slices/IngredientModal";
+import {setList} from "../../../services/slices/BurgerIngredients";
 
 const BurgerConstructorToppingList = (props) => {
 
