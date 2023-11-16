@@ -27,8 +27,13 @@
     flex-direction: column;
     overflow-y: scroll;
     row-gap: 16px;
+    width: 100%;
 }
 
 .constructor__order-plate-container {
     min-width: 215px;
+}
+
+.constructor__placeholder-text {
+    text-align: center;
 }
